@@ -17,3 +17,13 @@ def student_list(request):
             return Response(serializer.data,status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+def student_detail_view(request,pk):
+    try:
+        student=StudentModel.objects.get(pk=pk)
+        # serializer=StudentSerializer(student)
+    except StudentModel.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method=="GET":
+        serializer=StudentSerializer(student)
+        return Response(serializer.data,status=status.HTTP_200_OK)
