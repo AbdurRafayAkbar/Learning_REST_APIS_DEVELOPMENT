@@ -41,21 +41,48 @@ def student_detail_view(request,pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# LEarning CLASS BASED VIEW
-from rest_framework.views import APIView
-from employes.models import Employ
-from .serializers import EmploySerializer
+# # LEarning CLASS BASED VIEW
+# from rest_framework.views import APIView
+# from employes.models import Employ
+# from .serializers import EmploySerializer
+# from django.http import Http404
 
-class Employ_data(APIView):
-    def get(self,request):
-        employess=Employ.objects.all()
-        serializer=EmploySerializer(employess,many=True)
-        return Response(serializer.data,status=status.HTTP_302_FOUND)
+# class Employs_data(APIView):
+#     def get(self,request):
+#         employess=Employ.objects.all()
+#         serializer=EmploySerializer(employess,many=True)
+#         return Response(serializer.data,status=status.HTTP_302_FOUND)
     
-    def post(self,request):
-        serializer=EmploySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+#     def post(self,request):
+#         serializer=EmploySerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data,status=status.HTTP_201_CREATED)
+#         else:
+#             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+# # FOR PRIMARY KEYS VALUES
+# class Employs_detail_data(APIView):     
+#     def get_object(self,pk):
+#         try:
+#             return Employ.objects.get(pk=pk)
+#         except:
+#             raise Http404
+#     def get(self,request,pk):
+#         employe=self.get_object(pk)
+#         serializer=EmploySerializer(employe)
+#         return Response(serializer.data,status=status.HTTP_200_OK)
+    
+    
+#     def delete(self,request,pk):
+#         employe=self.get_object(pk)
+#         employe.delete()
+#         return Response(status=status.HTTP_200_OK)
+    
+#     def put(self,request,pk):
+#         employe=self.get_object(pk)
+#         serializer=EmploySerializer(employe,data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data,status=status.HTTP_200_OK)
+#         else:
+#             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
