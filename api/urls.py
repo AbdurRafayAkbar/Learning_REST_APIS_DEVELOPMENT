@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     path("students/",views.student_list,name="student_list"),
     path("students/<int:pk>",views.student_detail_view,name="student_detail"),
+    #CLASS BASED VIEW PATHS
     path("employes/",views.Employ_data.as_view(),name="Employes_data")
 ]

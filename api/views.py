@@ -4,6 +4,7 @@ from students.models import StudentModel
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+
 @api_view(["GET","POST"])
 def student_list(request):
     if request.method=="GET":
@@ -38,3 +39,23 @@ def student_detail_view(request,pk):
     elif request.method == "DELETE":
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# LEarning CLASS BASED VIEW
+from rest_framework.views import APIView
+from employes.models import Employ
+from .serializers import EmploySerializer
+
+class Employ_data(APIView):
+    def get(self,request):
+        employess=Employ.objects.all()
+        serializer=EmploySerializer(employess,many=True)
+        return Response(serializer.data,status=status.HTTP_302_FOUND)
+    
+    def post(self,request):
+        serializer=EmploySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
