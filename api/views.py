@@ -42,10 +42,10 @@ def student_detail_view(request,pk):
 
 
 # # LEarning CLASS BASED VIEW
-# from rest_framework.views import APIView
-# from employes.models import Employ
-# from .serializers import EmploySerializer
-# from django.http import Http404
+from rest_framework.views import APIView
+from employes.models import Employ
+from .serializers import EmploySerializer
+from django.http import Http404
 
 # class Employs_data(APIView):
 #     def get(self,request):
@@ -86,3 +86,24 @@ def student_detail_view(request,pk):
 #             return Response(serializer.data,status=status.HTTP_200_OK)
 #         else:
 #             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+
+## UNDERSTANDING MIXINS
+
+from rest_framework import mixins
+from rest_framework import generics
+
+class Employs_data(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
+    queryset =Employ.objects.all()
+    serializer_class=EmploySerializer
+
+    def get(self,request):
+        return self.list(request)
+    
+    def post(self,request):
+        return self.create(request)
+    
+
+class Employs_detail_data():
+    pass
