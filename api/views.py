@@ -105,5 +105,15 @@ class Employs_data(mixins.ListModelMixin,mixins.CreateModelMixin,generics.Generi
         return self.create(request)
     
 
-class Employs_detail_data():
-    pass
+class Employs_detail_data(mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
+    queryset=Employ.objects.all()
+    serializer_class=EmploySerializer
+
+    def get(self,request,pk):
+        return self.retrieve(request, pk)
+    
+    def delete(self,request,pk):
+        return self.delete(request, pk)
+    
+    def put(self,request,pk):
+        return self.update(request, pk)
