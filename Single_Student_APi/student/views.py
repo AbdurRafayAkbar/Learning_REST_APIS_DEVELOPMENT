@@ -16,11 +16,11 @@ class SingleStudent(mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.Up
     queryset=StudentModel.objects.all()
     serializer_class = StudentSerializer
 
-    def get(self,request):
-        return self.retrieve(request)
+    def get(self,request,pk):
+        return self.retrieve(request,pk)
     
-    def put(self,request):
-        return self.update(request)
+    def put(self,request,pk):
+        return self.update(request,pk)
     
-    def delete(self,request):
-        return self.destroy(request)
+    def delete(self,request,pk):
+        return self.destroy(request,pk)
