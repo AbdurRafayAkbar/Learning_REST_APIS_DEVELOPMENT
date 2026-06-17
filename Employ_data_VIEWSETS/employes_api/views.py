@@ -21,3 +21,18 @@ class EmployessViewset(viewsets.ViewSet):
         serializer=EmploySerializer(employe)
         return Response(serializer.data,status=status.HTTP_200_OK)
 
+    def put(self,request,pk):
+        employ=Employees.objects.get(pk=pk)
+        serializer=EmploySerializer(employ,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        else:
+            return serializer.error_messages
+    def destroy(self,request,pk):
+        employ=Employees.objects.get(pk=pk)
+        employ.delete()
+        return Response({
+            "message":"Employ Delterd Successfully"
+        },
+        status=status.HTTP_204_NO_CONTENT)
