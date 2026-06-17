@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import Employees
 from .serializers import EmploySerializer
 from rest_framework import viewsets , status
@@ -15,3 +15,9 @@ class EmployessViewset(viewsets.ViewSet):
             return Response(serializer.data,status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
+        
+    def retrieve(self,request,pk):
+        employe=get_object_or_404(Employees,pk=pk)
+        serializer=EmploySerializer(employe)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+
