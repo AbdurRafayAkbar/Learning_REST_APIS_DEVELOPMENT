@@ -9,7 +9,7 @@ class Employees(models.Model):
     ]
     name=models.CharField(max_length=100)
     email=models.EmailField(unique=True)
-    age=models.IntegerField(validators=[MaxValueValidator(60)])
+    age=models.IntegerField(validators=[MaxValueValidator(60),MinValueValidator(18)])
     department=models.CharField(max_length=100,default="Software Engineering",choices=department_choices)
 
     def __str__(self):
