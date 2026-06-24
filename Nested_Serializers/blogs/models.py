@@ -12,4 +12,4 @@ class Comments(models.Model):
     comments=models.TextField()
 
     def __str__(self):
-        return self.blogs
+        return self.comments
