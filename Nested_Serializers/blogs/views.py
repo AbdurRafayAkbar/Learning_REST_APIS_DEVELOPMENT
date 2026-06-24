@@ -1,3 +1,12 @@
 from django.shortcuts import render
+from .models import Comments,Blogs
+from .serializers import blog_serializer,comments_serializer
+from rest_framework import generics
 
-# Create your views here.
+class Blog_presentaion(generics.CreateAPIView,generics.ListAPIView):
+    queryset=Blogs
+    serializer_class=blog_serializer
+
+class Comments_presentation(generics.ListCreateAPIView):
+    queryset=Comments
+    serializer_class=comments_serializer
