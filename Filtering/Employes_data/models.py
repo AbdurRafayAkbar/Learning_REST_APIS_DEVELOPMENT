@@ -6,6 +6,7 @@ class Employes(models.Model):
     age=models.IntegerField()
     email=models.EmailField(unique=True)
     salary=models.DecimalField(max_digits=10,decimal_places=2)
+    designation=models.CharField(max_length=50,default="Employes")
 
     def __str__(self):
         return self.name
